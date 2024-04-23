@@ -38,17 +38,33 @@
                         const [num, setNum] = useState(0);
 
                         // 下拉選單
-                        const opList = ['台北', '台中', '台南'];
+                        const opList = ['台北', '台中', '台南','台北'];
                         const [selState, setSelState] = useState('選擇你的地區');
 
                         return (<div>
                             {/*下拉選單*/}
                             {selState}
-                            <select name="" id="">
+                            <select name="" id="" onChange={(e)=>{
+                                {/*觸發事件時會產生參數element=>e去取得值setselstate，透過(e.target.value)*/}
+                                console.log(e);
+                                setSelState(e.target.value);
+                                {/*target?:當在事件處理函數中，e（或者可以命名為其他名字，如 event）表示事件對象，e.target 表示觸發事件的 DOM 元素。對於 <select> 元素的 onChange 事件，當選擇的選項發生變化時，e.target.value 就是選擇的選項的值。在這個例子中，當選擇的選項發生變化時，即選擇不同的城市時，e.target.value 就是新選擇的城市的值，然後被用來更新狀態 selState。*/}
+
+                            }}>
                                 <option value="">請選擇</option>
+                                {
+                                    opList.map((city, index)=>{
+                                        {/*每得到一個值，就回傳值給city，通常用MAP來做*/}
+                                        return <option key={index} value={city}>{city}</option>
+                                    }) 
+                                }
+                                {/*key??在 React 中，當你在渲染列表時，每個列表項目需要具有唯一的 key 屬性。這是為了幫助 React 有效地識別列表中的項目，從而提高性能。通常，你會使用列表中每個項目的某個唯一識別符作為 key。在這個例子中，使用 map() 函數遍歷 opList 陣列時，index 參數表示當前項目的索引位置，而 key={index} 將這個索引作為該項目的 key。但是，這個方法只有在列表項目的順序不會改變且列表項目沒有唯一識別符時才應該使用，否則最好使用具有唯一識別符的屬性作為 key。*/}
+
+                                {/* 原生寫法
                                 <option value="台北">台北</option>
                                 <option value="台中">台中</option>
                                 <option value="台南">台南</option>
+                                */}
                             </select>
 
 
